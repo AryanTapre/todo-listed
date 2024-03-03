@@ -6,6 +6,24 @@ import {setAccessToken} from "../utiles/cookieToken.js";
 import SubTask from "../models/subtask.model.js"
 import Task from "../models/task.model.js";
 
+const logOut = asyncHandler((request,response) => {
+    const options = {
+        httpOnly:true,
+        secure:true,
+        expires: new Date(Date.now())
+    }
+
+    try {
+        response
+        .status(200)
+        .clearCookie("accessToken",options)
+        .json(new ApiResponse(200,"logout successfully"));
+
+    } catch (error) {
+        throw new ApiError(200,"unable to logout",[`${error}`]);
+    }
+})
+
 const signUp = asyncHandler( async(request,response) => {
     const {phoneNumber,password} = request.body;
 
@@ -136,5 +154,6 @@ const getCurrentUserStatus = asyncHandler(async(request,response) => {
 export {
     signUp,
     signIn,
-    getCurrentUserStatus
+    getCurrentUserStatus,
+    logOut
 };

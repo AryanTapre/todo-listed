@@ -29,6 +29,7 @@ function cronJob () {
                         const newPriority = await adjustPriority(daysGap);
                         console.log("priority:=>",newPriority);
 
+                        // updating to database!.
                         task.updateTaskPriorityCronJob(newPriority);
                         await task.save({validateBeforeSave:false});
                     }

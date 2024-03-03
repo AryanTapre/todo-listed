@@ -1,6 +1,6 @@
 class WhereClause {
-    #base;
-    #bigQuery;
+    #base; // model.find()
+    #bigQuery;  // having all query parameters as page,limit,filter=priority/dueDate
 
     constructor(base,bigQuery) {
         this.#base = base;
